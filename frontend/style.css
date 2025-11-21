@@ -1,0 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    /* background: linear-gradient(135deg, #2b1055, #7597de); */
+    height: 100vh;
+    padding: 40px;
+    color: white;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+}
+
+h1 {
+    font-weight: 600;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+.card {
+    backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    padding: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    text-align: left;
+}
+
+label {
+    font-weight: 400;
+    margin-top: 18px;
+    display: block;
+}
+
+.dropdown {
+    width: 200px;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    margin-bottom: 15px;
+}
+
+textarea {
+    width: 100%;
+    height: 280px;
+    background: #1b1b1b;
+    color: #d4d4d4;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 15px;
+    margin-top: 5px;
+    outline: none;
+}
+
+textarea:focus {
+    outline: 2px solid #7597de;
+}
+
+.run-btn {
+    background: #ff7b00;
+    color: white;
+    border: none;
+    font-size: 18px;
+    padding: 12px 25px;
+    border-radius: 10px;
+    margin-top: 15px;
+    cursor: pointer;
+    width: 170px;
+    transition: 0.2s ease;
+}
+
+.run-btn:hover {
+    background: #ff5900;
+}
+
+pre {
+    margin-top: 15px;
+    background: #0f0f0f;
+    color: #00ff88;
+    padding: 15px;
+    height: 280px;
+    border-radius: 8px;
+    overflow-y: auto;
+    font-size: 14px;
+    border-left: 4px solid #00ff88;
+}
