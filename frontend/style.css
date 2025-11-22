@@ -1,94 +1,198 @@
+/* ----------------------------------------------
+   GLOBAL RESET
+---------------------------------------------- */
 * {
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
 }
 
+/* ----------------------------------------------
+   THEME VARIABLES
+---------------------------------------------- */
+
+/* DEFAULT THEME → Neon Pink */
+:root {
+    --bg: #1a001f;
+    --text: #ffffff;
+
+    --card-bg: rgba(255, 255, 255, 0.08);
+    --border: rgba(255, 255, 255, 0.25);
+
+    --editor-bg: #0f0f0f;
+    --editor-text: #e8e8e8;
+
+    --output-bg: #000000;
+    --output-text: #00ff99;
+
+    --accent: #ff2eb8;
+}
+
+/* VS CODE DARK */
+.theme-vscode {
+    --bg: #1e1e1e;
+    --text: #d4d4d4;
+
+    --card-bg: #252526;
+    --border: #3c3c3c;
+
+    --editor-bg: #1e1e1e;
+    --editor-text: #d4d4d4;
+
+    --output-bg: #111111;
+    --output-text: #00d084;
+
+    --accent: #007acc;
+}
+
+/* MIDNIGHT BLUE */
+.theme-midnight {
+    --bg: #0a1433;
+    --text: #dce6ff;
+
+    --card-bg: rgba(255, 255, 255, 0.08);
+    --border: rgba(255, 255, 255, 0.2);
+
+    --editor-bg: #0b1128;
+    --editor-text: #dce6ff;
+
+    --output-bg: #050a1a;
+    --output-text: #27dcb3;
+
+    --accent: #4da3ff;
+}
+
+/* LIGHT MODE — FULLY HANDLED */
+.theme-light {
+    --bg: #f5f5f5;
+    --text: #222;
+
+    --card-bg: #ffffff;
+    --border: #d0d0d0;
+
+    --editor-bg: #ffffff;
+    --editor-text: #333;
+
+    --output-bg: #f1f1f1;
+    --output-text: #007744;
+
+    --accent: #0066ff;
+}
+
+/* ----------------------------------------------
+   BODY STYLING
+---------------------------------------------- */
 body {
-    /* background: linear-gradient(135deg, #2b1055, #7597de); */
+    background: var(--bg);
+    color: var(--text);
     height: 100vh;
-    padding: 40px;
+    /* padding: 20px; */
+}
+
+.navbar-custom{
+    background: var(--card-bg) !important;
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(10px);
+    padding: 15px;
+}
+
+.dropdown-toggle {
+    color: var(--text) !important;
+}
+
+
+/* Navbar text */
+.navbar-custom, 
+.navbar-custom .nav-item,
+.navbar-custom .navbar-brand{
+    color: var(--text) !important;
+}
+
+
+.dropdown-item {
+    cursor: pointer;
+}
+/* ----------------------------------------------
+   NAVBAR
+---------------------------------------------- */
+.navbar-custom {
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(8px);
+}
+
+/* ----------------------------------------------
+   PANELS & CARDS
+---------------------------------------------- */
+.card, .file-panel {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    color: var(--text);
+}
+
+/* ----------------------------------------------
+   FILE LIST
+---------------------------------------------- */
+#fileTabs li {
+    cursor: pointer;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+}
+
+#fileTabs li.active {
+    background: var(--accent);
     color: white;
+    font-weight: bold;
 }
 
-.container {
-    width: 80%;
-    margin: auto;
-    text-align: center;
-}
-
-h1 {
-    font-weight: 600;
-    margin-bottom: 20px;
-    letter-spacing: 1px;
-}
-
-.card {
-    backdrop-filter: blur(12px);
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 14px;
-    padding: 25px;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-    text-align: left;
-}
-
-label {
-    font-weight: 400;
-    margin-top: 18px;
-    display: block;
-}
-
-.dropdown {
-    width: 200px;
-    padding: 10px;
-    border-radius: 8px;
-    border: none;
-    margin-bottom: 15px;
-}
-
-textarea {
+/* ----------------------------------------------
+   EDITOR
+---------------------------------------------- */
+.code-box {
     width: 100%;
-    height: 280px;
-    background: #1b1b1b;
-    color: #d4d4d4;
-    border: none;
+    height: 350px;
+    background: var(--editor-bg);
+    color: var(--editor-text);
+    border: 1px solid var(--border);
     padding: 12px;
-    border-radius: 8px;
-    font-size: 15px;
-    margin-top: 5px;
+    border-radius: 10px;
     outline: none;
 }
 
-textarea:focus {
-    outline: 2px solid #7597de;
+.form-control:focus {
+    background: var(--editor-bg);
+    color: var(--editor-text);
+    outline: none;
+    box-shadow: none;
 }
 
-.run-btn {
-    background: #ff7b00;
-    color: white;
-    border: none;
-    font-size: 18px;
-    padding: 12px 25px;
-    border-radius: 10px;
-    margin-top: 15px;
-    cursor: pointer;
-    width: 170px;
-    transition: 0.2s ease;
+.code-box:focus {
+    border-color: var(--accent);
 }
 
-.run-btn:hover {
-    background: #ff5900;
-}
-
-pre {
-    margin-top: 15px;
-    background: #0f0f0f;
-    color: #00ff88;
+/* ----------------------------------------------
+   OUTPUT
+---------------------------------------------- */
+.output-box {
+    background: var(--output-bg);
+    color: var(--output-text);
     padding: 15px;
-    height: 280px;
-    border-radius: 8px;
+    height: 250px;
+    border-left: 4px solid var(--accent);
     overflow-y: auto;
-    font-size: 14px;
-    border-left: 4px solid #00ff88;
+    border-radius: 10px;
+}
+
+/* ----------------------------------------------
+   BUTTONS
+---------------------------------------------- */
+.run-btn {
+    background: var(--accent);
+    border: none;
+}
+.run-btn:hover {
+    opacity: 0.9;
 }

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: #f5f0f2;
+            /* very light maroon/rose tint */
+            font-family: "Poppins", sans-serif;
+        }
+
+        /* Center container */
+        .auth-wrapper {
+            min-height: 75vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Card styling */
+        .auth-box {
+            width: 50rem;
+            max-width: 90%;
+            background: white;
+            padding: 3rem 4rem;
+            border-radius: 1rem;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Button color override */
+        .btn-primary {
+            background-color: #6b0f1a;
+            border-color: #6b0f1a;
+        }
+
+        .btn-primary:hover {
+            background-color: #500b13;
+            border-color: #500b13;
+        }
+
+        /* Navbar styling */
+        .navbar-custom {
+            background-color: #6b0f1a;
+        }
+
+        .navbar-custom .nav-link,
+        .navbar-custom .navbar-brand {
+            color: white !important;
+        }
+
+        .navbar-custom .nav-link:hover {
+            color: #ffd4db !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-custom px-4 py-3">
+        <a class="navbar-brand fw-bold" href="editor.html">Online Compiler</a>
+
+        <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse ms-auto" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <!-- <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                        🎨 Theme
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" onclick="applyTheme('neon')">Neon Pink</a></li>
+                        <li><a class="dropdown-item" onclick="applyTheme('vscode')">VS Code Dark</a></li>
+                        <li><a class="dropdown-item" onclick="applyTheme('midnight')">Midnight Blue</a></li>
+                        <li><a class="dropdown-item" onclick="applyTheme('light')">Light Mode</a></li>
+                    </ul>
+                </li> -->
+                <li class="nav-item">
+                    <a class="nav-link" href="editor.html">Editor</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="signup.html">Signup</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- LOGIN CARD -->
+    <div class="auth-wrapper">
+        <div class="auth-box">
+
+            <h2 class="text-center mb-4">Login</h2>
+
+            <input id="email" class="form-control mb-3" type="email" placeholder="Email">
+            <input id="password" class="form-control mb-4" type="password" placeholder="Password">
+
+            <button class="btn btn-primary w-100 mb-3" onclick="login()">Login</button>
+
+            <p class="text-center">
+                Don't have an account?
+                <a href="signup.html" style="color:#6b0f1a; font-weight:600;">Signup</a>
+            </p>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+
+    <script>
+        async function login() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            const result = await api("/login", "POST", { email, password });
+
+            if (result.token) {
+                saveToken(result.token);
+                window.location.href = "editor.html";
+            } else {
+                alert(result.error);
+            }
+        }
+    </script>
+
+</body>
+
+</html>
+
+

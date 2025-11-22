@@ -1,2 +1,6 @@
 flask
 flask-cors
+werkzeug
+pyjwt
+bcrypt
+sqlalchemy

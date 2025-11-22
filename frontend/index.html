@@ -15,7 +15,9 @@
     <div class="container">
         <h1>Online Code Compiler</h1>
 
-        <div class="card">
+        <div class="card p-3">
+
+            <!-- LANGUAGE DROPDOWN -->
             <label>Language</label>
             <select id="language" class="dropdown border mt-2">
                 <option value="python">Python</option>
@@ -25,19 +27,33 @@
                 <option value="cpp">C++</option>
             </select>
 
-            <div class="d-flex">
-                <div class="w-50">
+            <!-- MAIN FLEX AREA -->
+            <div class="d-flex mt-3" style="height: 400px;">
+
+                <!-- LEFT SIDE: EDITOR -->
+                <div class="w-75 pe-2">
                     <label>Write Code</label>
                     <textarea id="code" placeholder="Write your code here..."></textarea>
                 </div>
-                <div class="w-50">
-                    <label>Output</label>
-                    <pre id="output"></pre>
+
+                <!-- RIGHT SIDE: FILE TABS -->
+                <div class="w-25 ps-2">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <label class="fw-bold">Files</label>
+                        <button class="btn btn-sm btn-dark" onclick="createNewTabInput()">+</button>
+                    </div>
+
+                    <ul id="fileTabs" class="list-group" style="cursor: pointer;"></ul>
                 </div>
+
             </div>
 
-            <button class="run-btn" onclick="runCode()">▶ Run Code</button>
+            <!-- OUTPUT -->
+            <label class="mt-3">Output</label>
+            <pre id="output"></pre>
 
+            <!-- RUN BUTTON -->
+            <button class="run-btn mt-2" onclick="runCode()">▶ Run Code</button>
 
         </div>
     </div>
