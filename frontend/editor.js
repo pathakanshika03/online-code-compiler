@@ -106,6 +106,7 @@ function createFileInput() {
             try {
                 const res = await api("/files", "POST", { filename: name, content: "" });
                 const newId = res.id;
+                currentFile = newId;
                 const newFile = { id: newId, filename: name, content: "", unsaved: false };
                 files.unshift(newFile);
                 renderTabs();
@@ -296,3 +297,64 @@ async function runCode() {
         document.getElementById("output").innerText = "Execution failed. See console.";
     }
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const isLoggedIn = sessionStorage.getItem("isloggedIn") ? "Y" : "N"; 
+    const authButton = document.getElementById("authButton");
+    const saveButton = document.getElementById("saveBtn");
+    if (isLoggedIn === "Y") {
+        authButton.innerHTML = `
+            <button class="btn btn-danger" onclick="logout()">Logout</button>
+        `;
+        saveButton.style.display = "inline-block";
+    } else {
+        authButton.innerHTML = `
+            <button class="btn btn-primary" onclick="goLogin()">Login</button>
+        `;
+        saveButton.style.display = "none";
+    }
+});
+
+function goLogin() {
+    window.location.href = "login.html";
+}
+
+const codeEditor = document.getElementById("code");
+
+codeEditor.addEventListener("keydown", function (e) {
+    const start = this.selectionStart;
+    const end = this.selectionEnd;
+
+    // TAB key -> insert 4 spaces
+    if (e.key === "Tab") {
+        e.preventDefault();
+        this.value = this.value.substring(0, start) + "    " + this.value.substring(end);
+        this.selectionStart = this.selectionEnd = start + 4;
+    }
+
+    // Auto-indent on Enter
+    if (e.key === "Enter") {
+        e.preventDefault();
+
+        // Get current line
+        let lineStart = this.value.lastIndexOf("\n", start - 1) + 1;
+        let currentLine = this.value.substring(lineStart, start);
+
+        // Count leading spaces
+        let indentMatch = currentLine.match(/^\s+/);
+        let indent = indentMatch ? indentMatch[0] : "";
+
+        // If previous line ends with a colon { } (Python, C, C++, JS)
+        if (/[{\(:]$/.test(currentLine.trim())) {
+            indent += "    "; // add one indentation level
+        }
+
+        const newText =
+            this.value.substring(0, start) +
+            "\n" + indent +
+            this.value.substring(end);
+
+        this.value = newText;
+        this.selectionStart = this.selectionEnd = start + 1 + indent.length;
+    }
+});

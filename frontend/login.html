@@ -124,6 +124,7 @@
 
             if (result.token) {
                 saveToken(result.token);
+                sessionStorage.setItem("isloggedIn", "Y");
                 window.location.href = "editor.html";
             } else {
                 alert(result.error);

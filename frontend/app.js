@@ -13,6 +13,7 @@ function getToken() {
 // Logout
 function logout() {
     localStorage.removeItem("token");
+    sessionStorage.removeItem("isloggedIn");
     window.location.href = "login.html";
 }
 
