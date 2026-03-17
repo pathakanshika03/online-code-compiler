@@ -285,7 +285,7 @@ async function runCode() {
     const language = document.getElementById("language").value;
 
     try {
-        const response = await fetch("http://127.0.0.1:5000/run", {
+        const response = await fetch("https://online-code-compiler-backend-bo31.onrender.com/run", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ language, code })
