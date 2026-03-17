@@ -63,7 +63,7 @@
 
     <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-custom px-4 py-3">
-        <a class="navbar-brand fw-bold" href="editor.html">Online Compiler</a>
+        <a class="navbar-brand fw-bold" href="index.html">Online Compiler</a>
 
         <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
@@ -84,7 +84,7 @@
                     </ul>
                 </li> -->
                 <li class="nav-item">
-                    <a class="nav-link" href="editor.html">Editor</a>
+                    <a class="nav-link" href="index.html">Editor</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="login.html">Login</a>
@@ -126,7 +126,7 @@
 
             if (result.token) {
                 saveToken(result.token);
-                window.location.href = "editor.html";
+                window.location.href = "index.html";
             } else {
                 alert(result.error);
             }
