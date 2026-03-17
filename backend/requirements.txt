@@ -4,3 +4,5 @@ werkzeug
 pyjwt
 bcrypt
 sqlalchemy
+Flask
+gunicorn
