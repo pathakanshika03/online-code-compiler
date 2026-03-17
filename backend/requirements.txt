@@ -1,8 +1,7 @@
-flask
+Flask
 flask-cors
 werkzeug
 pyjwt
 bcrypt
 sqlalchemy
-Flask
 gunicorn
