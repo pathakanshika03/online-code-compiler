@@ -86,6 +86,7 @@ function openFile(id) {
 
 // ---------------- CREATE NEW FILE (inline input)
 function createFileInput() {
+    if (!requireAuth("create new file")) return;
     const fileTabs = document.getElementById("fileTabs");
 
     const li = document.createElement("li");
@@ -138,8 +139,19 @@ codeEl.addEventListener("input", () => {
     }
 });
 
+function requireAuth(actionName = "perform this action") {
+    const isLoggedIn = sessionStorage.getItem("isloggedIn");
+
+    if (isLoggedIn !== "Y") {
+        alert(`Please login first to ${actionName}`);
+        return false;
+    }
+    return true;
+}
+
 // ---------------- SAVE (manual & auto-draft) ----------------
 async function saveCurrentFile() {
+    if (!requireAuth("save files")) return;
     if (!currentFile) {
         alert("No file is open to save");
         return;

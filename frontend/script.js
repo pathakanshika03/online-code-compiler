@@ -166,9 +166,18 @@ function loadCurrentFile() {
     editor.value = currentFile ? files[currentFile] : "";
 }
 
+function requireAuth(actionName = "perform this action") {
+    const isLoggedIn = sessionStorage.getItem("isloggedIn");
 
+    if (isLoggedIn !== "Y") {
+        alert(`Please login first to ${actionName}`);
+        return false;
+    }
+    return true;
+}
 // ========= SAVE CONTENT ========= //
 function saveCurrentFile() {
+    if (!requireAuth("save files")) return;
     if (currentFile) {
         files[currentFile] = document.getElementById("code").value;
     }

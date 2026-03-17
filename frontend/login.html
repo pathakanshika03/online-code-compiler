@@ -1,60 +1,149 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" class="theme-midnight"> <!-- change theme here -->
 
 <head>
+    <meta charset="UTF-8">
     <title>Login</title>
 
-    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         body {
-            background: #f5f0f2;
-            /* very light maroon/rose tint */
+            background: var(--bg);
+            color: var(--text);
             font-family: "Poppins", sans-serif;
         }
 
-        /* Center container */
+        /* NAVBAR */
+        .navbar-custom {
+            background: transparent;
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar-custom .nav-link,
+        .navbar-custom .navbar-brand {
+            color: var(--text) !important;
+        }
+
+        /* .navbar-custom .nav-link:hover {
+            color: var(--accent) !important;
+        } */
+
+        /* LAYOUT */
         .auth-wrapper {
-            min-height: 75vh;
+            min-height: 90vh;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .left-panel {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px;
+        }
+
+        .left-panel h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .left-panel span {
+            color: var(--accent);
+        }
+
+        .left-panel p {
+            opacity: 0.8;
+            max-width: 400px;
+        }
+
+        /* RIGHT PANEL */
+        .right-panel {
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* Card styling */
+        /* GLASS CARD */
         .auth-box {
-            width: 50rem;
-            max-width: 90%;
-            background: white;
-            padding: 3rem 4rem;
-            border-radius: 1rem;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            width: 400px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: fadeUp 0.6s ease;
         }
 
-        /* Button color override */
+        .auth-box h2 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .form-control {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        .form-control::placeholder {
+            color: #aaa;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent);
+            box-shadow: none;
+        }
+
+        /* BUTTON */
         .btn-primary {
-            background-color: #6b0f1a;
-            border-color: #6b0f1a;
+            background: var(--accent);
+            border: none;
         }
 
         .btn-primary:hover {
-            background-color: #500b13;
-            border-color: #500b13;
+            opacity: 0.9;
+            background: var(--accent);
+            border: none;
         }
 
-        /* Navbar styling */
-        .navbar-custom {
-            background-color: #6b0f1a;
+        /* FOOT TEXT */
+        .auth-box a {
+            color: var(--accent);
+            font-weight: 500;
+            text-decoration: none;
         }
 
-        .navbar-custom .nav-link,
-        .navbar-custom .navbar-brand {
-            color: white !important;
+        .auth-box a:hover {
+            text-decoration: underline;
         }
 
-        .navbar-custom .nav-link:hover {
-            color: #ffd4db !important;
+        /* ANIMATION */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .auth-wrapper {
+                flex-direction: column;
+            }
+
+            .left-panel {
+                text-align: center;
+                padding: 30px;
+            }
         }
     </style>
 </head>
@@ -62,59 +151,69 @@
 <body>
 
     <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-custom px-4 py-3">
-        <a class="navbar-brand fw-bold" href="index.html">Online Compiler</a>
+    <nav class="navbar navbar-expand-lg navbar-custom px-4 py-3 header">
+        <div class="col-7">
+            <a class="navbar-brand fw-bold" href="index.html">CodeDock</a>
+        </div>
+        <div class="nav-buttons">
+            <button onclick="navigateTo('index.html')">Home</button>
+            <button onclick="navigateTo('login.html')">Login</button>
+            <button onclick="navigateTo('signup.html')">Signup</button>
+            <button style="background: var(--accent); color: white;" onclick="navigateTo('editor.html')">Editor</button>
+            <button class="nav-item dropdown" data-bs-toggle="dropdown">
+                <a class="nav-link dropdown-toggle" href="#">
+                    🎨 Theme
+                </a>
 
-        <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse ms-auto" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <!-- <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                        🎨 Theme
-                    </a>
-
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" onclick="applyTheme('neon')">Neon Pink</a></li>
-                        <li><a class="dropdown-item" onclick="applyTheme('vscode')">VS Code Dark</a></li>
-                        <li><a class="dropdown-item" onclick="applyTheme('midnight')">Midnight Blue</a></li>
-                        <li><a class="dropdown-item" onclick="applyTheme('light')">Light Mode</a></li>
-                    </ul>
-                </li> -->
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html">Editor</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="signup.html">Signup</a>
-                </li>
-            </ul>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" onclick="applyTheme('neon')">Neon Pink</a></li>
+                    <li><a class="dropdown-item" onclick="applyTheme('vscode')">VS Code Dark</a></li>
+                    <li><a class="dropdown-item" onclick="applyTheme('midnight')">Midnight Blue</a></li>
+                    <li><a class="dropdown-item" onclick="applyTheme('light')">Light Mode</a></li>
+                </ul>
+            </button>
         </div>
     </nav>
 
-    <!-- LOGIN CARD -->
+    <!-- MAIN -->
     <div class="auth-wrapper">
-        <div class="auth-box">
 
-            <h2 class="text-center mb-4">Login</h2>
-
-            <input id="email" class="form-control mb-3" type="email" placeholder="Email">
-            <input id="password" class="form-control mb-4" type="password" placeholder="Password">
-
-            <button class="btn btn-primary w-100 mb-3" onclick="login()">Login</button>
-
-            <p class="text-center">
-                Don't have an account?
-                <a href="signup.html" style="color:#6b0f1a; font-weight:600;">Signup</a>
+        <!-- LEFT SIDE -->
+        <div class="left-panel">
+            <h1>Welcome Back 👋</h1>
+            <p>
+                Continue your coding journey. Write, run, and debug your programs
+                instantly with our powerful online compiler.
             </p>
 
+            <h4 class="mt-4">✨ Why use this?</h4>
+            <p>✔ No setup required</p>
+            <p>✔ Multiple languages supported</p>
+            <p>✔ Fast & secure execution</p>
         </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="right-panel">
+            <div class="auth-box">
+
+                <h2>Login</h2>
+
+                <input id="email" class="form-control mb-3" type="email" placeholder="Email"/>
+                <input id="password" class="form-control mb-3" type="password" placeholder="Password"/>
+
+                <button class="btn btn-primary w-100 mb-3" onclick="login()">Login</button>
+
+                <p class="text-center">
+                    Don't have an account?
+                    <a href="signup.html">Signup</a>
+                </p>
+
+            </div>
+        </div>
+
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="app.js"></script>
-
+    <script src="app.js"></script> <!-- must provide api() and theme helpers -->
     <script>
         async function login() {
             const email = document.getElementById("email").value;
@@ -125,7 +224,7 @@
             if (result.token) {
                 saveToken(result.token);
                 sessionStorage.setItem("isloggedIn", "Y");
-                window.location.href = "index.html";
+                window.location.href = "editor.html";
             } else {
                 alert(result.error);
             }
@@ -135,5 +234,3 @@
 </body>
 
 </html>
-
-

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-vscode">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Online Code Editor</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-custom px-4 py-3 header">
+        <div class="col-7">
+            <a class="navbar-brand fw-bold" href="index.html">CodeDock</a>
+        </div>
+        <div class="nav-buttons">
+            <button onclick="navigateTo('index.html')">Home</button>
+            <button onclick="navigateTo('login.html')">Login</button>
+            <button onclick="navigateTo('signup.html')">Signup</button>
+            <button style="background: var(--accent); color: white;">Editor</button>
+            <button class="nav-item dropdown" data-bs-toggle="dropdown">
+                <a class="nav-link dropdown-toggle" href="#">
+                    🎨 Theme
+                </a>
+
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" onclick="applyTheme('neon')">Neon Pink</a></li>
+                    <li><a class="dropdown-item" onclick="applyTheme('vscode')">VS Code Dark</a></li>
+                    <li><a class="dropdown-item" onclick="applyTheme('midnight')">Midnight Blue</a></li>
+                    <li><a class="dropdown-item" onclick="applyTheme('light')">Light Mode</a></li>
+                </ul>
+            </button>
+        </div>
+    </nav>
+
+    <!-- BRAND LINE -->
+    <div class="branding-line mt-3">
+        Fast • Secure • Multi-language Code Execution
+    </div>
+
+    <!-- MAIN -->
+    <div class="editor-wrapper">
+
+        <!-- SIDEBAR -->
+        <div class="file-panel">
+            <div class="file-header">
+                <span>📁 Files</span>
+                <button onclick="createFileInput()">+</button>
+            </div>
+
+            <p class="file-subtext">
+                Manage your programs. Click a file to edit or create a new one.
+            </p>
+
+            <ul id="fileTabs" class="file-list"></ul>
+        </div>
+
+        <!-- MAIN EDITOR -->
+        <div class="editor-panel">
+
+            <!-- TOPBAR -->
+            <div class="editor-topbar">
+
+                <div class="left">
+                    <span class="editor-label">🧠 Code Editor</span>
+
+                    <select id="language">
+                        <option value="python">Python</option>
+                        <option value="java">Java</option>
+                        <option value="javascript">JavaScript</option>
+                        <option value="c">C</option>
+                        <option value="cpp">C++</option>
+                    </select>
+                </div>
+
+                <div class="actions">
+                    <button onclick="saveCurrentFile()" class="btn-save">💾 Save</button>
+                    <button onclick="runCode()" class="btn-run">▶ Run Code</button>
+                </div>
+
+            </div>
+
+            <!-- EDITOR -->
+            <div class="editor-container">
+                <textarea id="code" placeholder="// Start typing your code here...
+// Example:
+// print('Hello World')
+// Click ▶ Run to execute"></textarea>
+            </div>
+
+            <!-- OUTPUT -->
+            <div class="output-container">
+                <div class="output-header">
+                    ⚡ Output Console
+                    <span class="output-sub">Execution results will appear here</span>
+                </div>
+
+                <pre id="output">// Run your code to see output...</pre>
+            </div>
+
+            <!-- TIP -->
+
+        </div>
+    </div>
+
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+    <script src="editor.js"></script>
+
+</body>
+
+</html>

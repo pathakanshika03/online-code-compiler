@@ -36,12 +36,8 @@ async function api(url, method = "GET", body = null) {
 // THEME SWITCHER
 // -----------------------------
 function applyTheme(name) {
-    document.body.classList.remove("theme-vscode", "theme-midnight", "theme-light");
-
-    if (name !== "neon") {
-        document.body.classList.add("theme-" + name);
-    }
-
+    document.body.classList.remove("theme-vscode", "theme-midnight", "theme-light", "neon");
+    document.body.classList.add("theme-" + name);
     localStorage.setItem("theme", name);
 }
 
@@ -54,6 +50,10 @@ window.onload = function () {
     const saved = localStorage.getItem("theme") || "neon";
     document.body.className = `theme-${saved}`;
 };
+
+function navigateTo(page) {
+    window.location.href = page;
+}
 
 loadTheme();
 

@@ -1,27 +1,322 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" class="theme-vscode">
 
 <head>
-    <title>Code Editor</title>
-
-    <!-- Bootstrap -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Online Code Compiler</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom Styles -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            background: var(--bg);
+            color: var(--text);
+            transition: 0.3s ease;
+        }
+
+        /* HEADER */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .nav-buttons button {
+            margin-left: 10px;
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text);
+            cursor: pointer;
+        }
+
+        .nav-buttons button:hover {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        /* HERO */
+        .hero {
+            text-align: center;
+            padding: 80px 20px 40px;
+        }
+
+        .hero h1 {
+            font-size: 44px;
+            margin-bottom: 15px;
+        }
+
+        .hero span {
+            color: var(--accent);
+        }
+
+        .hero p {
+            max-width: 600px;
+            margin: 0 auto 25px;
+            opacity: 0.85;
+        }
+
+        .hero button {
+            padding: 12px 24px;
+            border: none;
+            background: var(--accent);
+            color: #fff;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* STATS */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            padding: 30px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat h2 {
+            color: var(--accent);
+        }
+
+        /* SECTION TITLE */
+        .section-title {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 28px;
+        }
+
+        /* CARDS */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 40px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 25px;
+            transition: 0.3s;
+        }
+
+        .hero-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 70px;
+            margin: 0px auto;
+            margin-top: 35px;
+            width: 55rem;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        .zoom-in {
+            transition: transform 0.3s ease;
+        }
+
+        .zoom-in:hover {
+            transform: scale(1.08);
+        }
+
+        .card p {
+            opacity: 0.85;
+            font-size: 14px;
+        }
+
+        /* HOW IT WORKS */
+        .steps {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 40px;
+            flex-wrap: wrap;
+        }
+
+        .step {
+            max-width: 250px;
+            text-align: center;
+        }
+
+        .step h4 {
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        /* CTA */
+        .cta {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .cta h2 {
+            margin-bottom: 15px;
+        }
+
+        .cta button {
+            padding: 12px 24px;
+            background: var(--accent);
+            border: none;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .bounce-text span {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: bounceIn 0.6s ease forwards;
+        }
+
+        /* stagger effect */
+        .bounce-text span:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .bounce-text span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .bounce-text span:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .bounce-text span:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .bounce-text span:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        .bounce-text span:nth-child(6) {
+            animation-delay: 0.6s;
+        }
+
+        .bounce-text span:nth-child(7) {
+            animation-delay: 0.7s;
+        }
+
+        .bounce-text span:nth-child(8) {
+            animation-delay: 0.8s;
+        }
+
+        .bounce-text span:nth-child(9) {
+            animation-delay: 0.9s;
+        }
+
+        .bounce-text span:nth-child(10) {
+            animation-delay: 1s;
+        }
+
+        .bounce-text span:nth-child(11) {
+            animation-delay: 1.1s;
+        }
+
+        .bounce-text span:nth-child(12) {
+            animation-delay: 1.2s;
+        }
+
+        .bounce-text span:nth-child(13) {
+            animation-delay: 1.3s;
+        }
+
+        .bounce-text span:nth-child(14) {
+            animation-delay: 1.4s;
+        }
+
+        .bounce-text span:nth-child(15) {
+            animation-delay: 1.5s;
+        }
+
+        .bounce-text span:nth-child(16) {
+            animation-delay: 1.6s;
+        }
+
+        .bounce-text span:nth-child(17) {
+            animation-delay: 1.7s;
+        }
+
+        .bounce-text span:nth-child(18) {
+            animation-delay: 1.8s;
+        }
+
+        /* optional delay for paragraph */
+        .delay span {
+            animation-delay: calc(1s + var(--i, 0) * 0.1s);
+        }
+
+        /* bounce animation */
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            60% {
+                opacity: 1;
+                transform: translateY(-10px);
+            }
+
+            80% {
+                transform: translateY(5px);
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* highlight word */
+        .highlight {
+            color: var(--accent);
+        }
+    </style>
 </head>
 
 <body>
 
-    <!-- ---------------- NAVBAR ---------------- -->
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom px-3">
-        <a class="navbar-brand" href="index.html">Online Code Editor</a>
-
-        <ul class="navbar-nav ms-auto">
-
-            <!-- Theme Switcher -->
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+    <!-- HEADER -->
+    <nav class="navbar navbar-expand-lg navbar-custom px-4 py-3 header">
+        <div class="col-7">
+            <a class="navbar-brand fw-bold" href="index.html">CodeDock</a>
+        </div>
+        <div class="nav-buttons">
+            <button onclick="navigateTo('index.html')">Home</button>
+            <button onclick="navigateTo('login.html')">Login</button>
+            <button onclick="navigateTo('signup.html')">Signup</button>
+            <button style="background: var(--accent); color: white;">Editor</button>
+            <button class="nav-item dropdown" data-bs-toggle="dropdown">
+                <a class="nav-link dropdown-toggle" href="#">
                     🎨 Theme
                 </a>
 
@@ -31,59 +326,179 @@
                     <li><a class="dropdown-item" onclick="applyTheme('midnight')">Midnight Blue</a></li>
                     <li><a class="dropdown-item" onclick="applyTheme('light')">Light Mode</a></li>
                 </ul>
-            </li>
-
-            <!-- Logout button -->
-            <li class="nav-item ms-3" id="authButton"></li>
-
-        </ul>
+            </button>
+        </div>
     </nav>
 
-    <!-- ---------------- MAIN LAYOUT ---------------- -->
-    <div class="container-fluid mt-4 d-flex gap-4">
+    <!-- HERO -->
+    <div class="hero hero-card">
+        <h1 class="bounce-text">
+            <span>Write.</span>
+            <span>Run.</span>
+            <span><span class="highlight">Debug.</span></span>
+            <span>Repeat.</span>
+        </h1>
 
-        <!-- ---------------- FILE SIDEBAR ---------------- -->
-        <div class="p-3 rounded file-panel" style="width: 18rem;">
-            <div class="d-flex justify-content-between align-items-center mb-2">
-                <h5 class="mb-0">📁 Your Files</h5>
-                <button class="btn btn-sm btn-outline-light" onclick="createFileInput()">+ New</button>
-            </div>
+        <p class="bounce-text delay">
+            <span>A</span>
+            <span>powerful</span>
+            <span>online</span>
+            <span>compiler</span>
+            <span>that</span>
+            <span>lets</span>
+            <span>you</span>
+            <span>code</span>
+            <span>in</span>
+            <span>multiple</span>
+            <span>languages,</span>
+            <span>test</span>
+            <span>your</span>
+            <span>logic,</span>
+            <span>and</span>
+            <span>improve</span>
+            <span>your</span>
+            <span>skills</span>
+        </p>
 
-            <ul id="fileTabs" class="list-group mb-3"></ul>
+        <button>Start Coding Now</button>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats">
+        <div class="stat zoom-in">
+            <h2>10K+</h2>
+            <p>Programs Executed</p>
         </div>
-
-        <!-- ---------------- EDITOR PANEL ---------------- -->
-        <div class="flex-grow-1 d-flex flex-column">
-
-            <div class="d-flex justify-content-between align-items-center mb-2">
-                <select id="language" class="form-select mb-0" style="width: 200px;">
-                    <option value="python">Python</option>
-                    <option value="java">Java</option>
-                    <option value="javascript">JavaScript</option>
-                    <option value="c">C</option>
-                    <option value="cpp">C++</option>
-                </select>
-
-                <div>
-                    <button class="btn btn-secondary me-2" id="saveBtn" onclick="saveCurrentFile()">💾 Save</button>
-                    <button class="btn btn-primary run-btn" onclick="runCode()">▶ Run</button>
-                </div>
-            </div>
-
-            <!-- Code Editor -->
-            <textarea id="code" class="form-control code-box mb-3" placeholder="Write code here..."></textarea>
-
-            <!-- Output Box -->
-            <pre id="output" class="output-box"></pre>
-
+        <div class="stat zoom-in">
+            <h2>15+</h2>
+            <p>Languages Supported</p>
+        </div>
+        <div class="stat zoom-in">
+            <h2>5K+</h2>
+            <p>Active Users</p>
         </div>
     </div>
 
-    <!-- JS -->
+    <!-- FEATURES -->
+    <h2 class="section-title">Core Features</h2>
+    <div class="grid">
+        <div class="card">
+            <h3>⚡ Instant Execution</h3>
+            <p>Run your code in milliseconds with optimized backend execution.</p>
+        </div>
+
+        <div class="card">
+            <h3>🧠 Smart Debugging</h3>
+            <p>Get clear error outputs and debug faster with structured logs.</p>
+        </div>
+
+        <div class="card">
+            <h3>🌐 Multi-Language</h3>
+            <p>Supports JavaScript, Python, Java, C++, and more.</p>
+        </div>
+
+        <div class="card">
+            <h3>📁 Code Storage</h3>
+            <p>Save, organize, and revisit your programs anytime.</p>
+        </div>
+
+        <div class="card">
+            <h3>🎯 Clean Interface</h3>
+            <p>Minimal UI designed for focus and productivity.</p>
+        </div>
+
+        <div class="card">
+            <h3>🔐 Secure Execution</h3>
+            <p>Sandboxed environment ensures safe code execution.</p>
+        </div>
+    </div>
+
+    <!-- USE CASES -->
+    <h2 class="section-title">Who is it for?</h2>
+    <div class="grid">
+        <div class="card">
+            <h3>👨‍🎓 Students</h3>
+            <p>Practice coding without installing heavy software.</p>
+        </div>
+
+        <div class="card">
+            <h3>💼 Developers</h3>
+            <p>Quickly test snippets and debug ideas on the go.</p>
+        </div>
+
+        <div class="card">
+            <h3>🎯 Interview Prep</h3>
+            <p>Solve problems and track your coding progress.</p>
+        </div>
+
+        <div class="card">
+            <h3>🚀 Beginners</h3>
+            <p>Start coding instantly with zero setup required.</p>
+        </div>
+    </div>
+
+    <!-- HOW IT WORKS -->
+    <h2 class="section-title">How It Works</h2>
+    <div class="steps">
+        <div class="step zoom-in">
+            <h4>1. Write Code</h4>
+            <p>Use our editor to write your program.</p>
+        </div>
+
+        <div class="step zoom-in">
+            <h4>2. Run</h4>
+            <p>Click run and execute instantly.</p>
+        </div>
+
+        <div class="step zoom-in">
+            <h4>3. Debug</h4>
+            <p>Analyze output and fix errors.</p>
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta">
+        <h2>Ready to start coding?</h2>
+        <p>Jump into the editor and bring your ideas to life.</p>
+        <button>Go to Editor</button>
+    </div>
+    <script src="editor.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="app.js"></script> <!-- must provide api() and theme helpers -->
     <script src="editor.js"></script>
+    <script>
+        document.querySelectorAll('.bounce-text').forEach(el => {
+            const words = el.innerText.split(' ');
+            el.innerHTML = words
+                .map((word, i) => `<span style="animation-delay:${i * 0.1}s">${word}</span>`)
+                .join(' ');
+        });
+        function animateText(el) {
+            const text = el.getAttribute("data-text") || el.innerText;
 
+            // store original text once
+            el.setAttribute("data-text", text);
+
+            const words = text.split(" ");
+
+            // rebuild spans with stagger
+            el.innerHTML = words
+                .map((word, i) =>
+                    `<span style="animation-delay:${i * 0.1}s">${word}</span>`
+                )
+                .join(" ");
+        }
+
+        // init all
+        const elements = document.querySelectorAll(".bounce-text");
+
+        elements.forEach(el => animateText(el));
+
+        /* 🖱 Hover trigger */
+        document.querySelector(".hero-card").addEventListener("mouseenter", () => {
+            elements.forEach(el => animateText(el));
+        });
+    </script>
 </body>
 
 </html>
