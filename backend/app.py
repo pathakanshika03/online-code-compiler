@@ -19,7 +19,9 @@ CORS(app)
 
 SECRET_KEY = "compiler_online"    # 👉 change this later
 
-
+@app.route("/")
+def home():
+    return "Backend is running 🚀"
 # ---------------------------
 # JWT Helpers
 # ---------------------------
