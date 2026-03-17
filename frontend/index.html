@@ -97,7 +97,7 @@
         /* SECTION TITLE */
         .section-title {
             text-align: center;
-            margin-top: 40px;
+            margin-top: 20px;
             font-size: 28px;
         }
 
@@ -126,6 +126,7 @@
             margin-top: 35px;
             width: 55rem;
             transition: 0.3s;
+            animation: fadeUp 0.6s ease;
         }
 
         .card:hover {
@@ -173,7 +174,7 @@
         /* CTA */
         .cta {
             text-align: center;
-            padding: 60px 20px;
+            padding: 20px 20px;
         }
 
         .cta h2 {
@@ -293,6 +294,17 @@
             100% {
                 transform: translateY(0);
                 opacity: 1;
+            }
+        }
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
