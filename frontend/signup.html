@@ -212,8 +212,12 @@
                 <div class="hint">Password should be at least 6 characters</div>
 
                 <button class="btn btn-primary w-100 mb-3" onclick="signup()">Create Account</button>
-
-                <p class="text-center">
+                <div id="g_id_onload" data-client_id="YOUR_GOOGLE_CLIENT_ID" data-callback="handleGoogleLogin">
+                </div>
+                
+                <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline">
+                </div>
+                <p class="text-center mt-2">
                     Already have an account?
                     <a href="login.html">Login</a>
                 </p>
@@ -240,7 +244,23 @@
                 alert(result.error);
             }
         }
+        async function handleGoogleLogin(response) {
+            const idToken = response.credential;
+
+            const result = await api("/google-login", "POST", {
+                token: idToken
+            });
+
+            if (result.token) {
+                saveToken(result.token);
+                sessionStorage.setItem("isloggedIn", "Y");
+                window.location.href = "editor.html";
+            } else {
+                alert("Google login failed");
+            }
+        }
     </script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 
 </body>
 

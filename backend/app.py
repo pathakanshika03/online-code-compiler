@@ -203,7 +203,50 @@ def delete_file(user, file_id):
 
     return {"deleted": True}
 
+from google.oauth2 import id_token
+from google.auth.transport import requests
 
+GOOGLE_CLIENT_ID = "YOUR_GOOGLE_CLIENT_ID"
+
+@app.route("/google-login", methods=["POST"])
+def google_login():
+    data = request.json
+    token = data.get("token")
+
+    try:
+        idinfo = id_token.verify_oauth2_token(
+            token,
+            requests.Request(),
+            GOOGLE_CLIENT_ID
+        )
+
+        email = idinfo["email"]
+        name = idinfo.get("name", "")
+
+        db = SessionLocal()
+
+        # check if user exists
+        user = db.query(User).filter(User.email == email).first()
+
+        if not user:
+            user = User(email=email, name=name)
+            db.add(user)
+            db.commit()
+
+        # create JWT (reuse your existing logic)
+        jwt_token = jwt.encode(
+            {
+                "user_id": user.id,
+                "exp": datetime.datetime.utcnow() + datetime.timedelta(hours=24)
+            },
+            "SECRET_KEY",
+            algorithm="HS256"
+        )
+
+        return jsonify({"token": jwt_token})
+
+    except Exception as e:
+        return jsonify({"error": "Invalid Google token"}), 400
 # ---------------------------
 # Start Server
 # ---------------------------

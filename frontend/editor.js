@@ -86,7 +86,14 @@ function openFile(id) {
 
 // ---------------- CREATE NEW FILE (inline input)
 function createFileInput() {
-    if (!requireAuth("create new file")) return;
+    if (!requireAuth("create files")) return;
+
+    const lang = document.getElementById("language").value;
+
+    const newFile = {
+        name: "new_file",
+        content: DEFAULT_CODE[lang]
+    };
     const fileTabs = document.getElementById("fileTabs");
 
     const li = document.createElement("li");
@@ -368,5 +375,92 @@ codeEditor.addEventListener("keydown", function (e) {
 
         this.value = newText;
         this.selectionStart = this.selectionEnd = start + 1 + indent.length;
+    }
+});
+
+const DEFAULT_CODE = {
+    python: `# 🐍 Python Starter
+# Write your code below
+# Example: print output to console
+
+print("Hello, World!")
+
+# Try:
+# name = input("Enter your name: ")
+# print("Hello", name)
+`,
+
+    javascript: `// ⚡ JavaScript Starter
+// Write your code below
+// Example: log output to console
+
+console.log("Hello, World!");
+
+// Try:
+// let name = prompt("Enter your name:");
+// console.log("Hello " + name);
+`,
+
+    java: `// ☕ Java Starter
+// File name must be Main.java
+
+public class Main {
+    public static void main(String[] args) {
+
+        System.out.println("Hello, World!");
+
+        // Try:
+        // Scanner sc = new Scanner(System.in);
+        // String name = sc.nextLine();
+        // System.out.println("Hello " + name);
+    }
+}
+`,
+
+    c: `// 🔧 C Starter
+#include <stdio.h>
+
+int main() {
+
+    printf("Hello, World!\\n");
+
+    // Try:
+    // int num;
+    // scanf("%d", &num);
+    // printf("You entered: %d", num);
+
+    return 0;
+}
+`,
+
+    cpp: `// 🚀 C++ Starter
+#include <iostream>
+using namespace std;
+
+int main() {
+
+    cout << "Hello, World!" << endl;
+
+    // Try:
+    // int num;
+    // cin >> num;
+    // cout << "You entered: " << num;
+
+    return 0;
+}
+`
+};
+
+window.addEventListener("DOMContentLoaded", () => {
+    const lang = document.getElementById("language").value;
+    document.getElementById("code").value = DEFAULT_CODE[lang];
+});
+
+document.getElementById("language").addEventListener("change", function () {
+    const lang = this.value;
+    const codeBox = document.getElementById("code");
+
+    if (!codeBox.value || Object.values(DEFAULT_CODE).includes(codeBox.value)) {
+        codeBox.value = DEFAULT_CODE[lang];
     }
 });
