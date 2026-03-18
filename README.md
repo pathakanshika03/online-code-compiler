@@ -106,62 +106,24 @@ Uses a Blob + invisible anchor link.
 
 ---
 
-## 🏗️ Project Structure
 
-```
-/src
-  /components
-    Editor.jsx
-    Tabs.jsx
-    Sidebar.jsx
-    OutputPanel.jsx
-    ThemeSwitcher.jsx
-  /utils
-    localStorage.js
-    fileManager.js
-  App.jsx
-  index.js
-  styles.css
-
-public/
-  index.html
-README.md
-```
-
----
-
-## ⚙️ Technologies Used
-
-* **React / Vanilla JS**
-* **Monaco Editor or CodeMirror**
-* **localStorage API**
-* **Split.js or custom resizable handles**
-* **CSS variables for theming**
-* **FileSaver / Blob for downloads**
-
----
 
 ## 🚀 Getting Started
 
 ### 1️⃣ Install dependencies
 
 ```
-npm install
+pip install -r requirements.txt
 ```
 
 ### 2️⃣ Run development server
 
 ```
-npm start
+python app.py
+Go Live
 ```
 
-### 3️⃣ Build for production
 
-```
-npm run build
-```
-
----
 
 ## 🧪 How Auto-Save Works
 
