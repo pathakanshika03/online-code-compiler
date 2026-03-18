@@ -1,4 +1,4 @@
-# 🚀 Online Code Editor – Full Documentation
+#CodeDock Online Code Editor – Full Documentation
 
 A lightweight, VS Code–style online code editor built with modern web technologies.
 Supports tabs, theming, Monaco/CodeMirror integration, auto-save, stdin input, and more.
