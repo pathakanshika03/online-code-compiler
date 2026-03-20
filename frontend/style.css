@@ -234,11 +234,14 @@ body {
 /* ---------------- SIDEBAR ---------------- */
 .file-panel {
     width: 260px;
+    min-width: 150px;
+    max-width: 50%;
     background: var(--card-bg);
     border: 1px solid var(--border);
     border-radius: 15px;
     padding: 15px;
     backdrop-filter: blur(12px);
+    flex-shrink: 0;
 }
 
 .file-header {
@@ -340,6 +343,7 @@ body {
 /* ---------------- EDITOR ---------------- */
 .editor-container {
     flex: 1;
+    min-height: 120px;
     background: var(--editor-bg);
     border-radius: 15px;
     border: 1px solid var(--border);
@@ -361,10 +365,93 @@ body {
 
 /* ---------------- OUTPUT ---------------- */
 .output-container {
+    min-height: 80px;
     background: var(--output-bg);
     border-radius: 15px;
     border: 1px solid var(--border);
     overflow: hidden;
+}
+
+/* ---------------- RESIZE HANDLES ---------------- */
+.resize-handle-vertical {
+    width: 6px;
+    cursor: col-resize;
+    background: transparent;
+    border-radius: 3px;
+    flex-shrink: 0;
+    transition: background 0.2s;
+    position: relative;
+}
+
+.resize-handle-vertical::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 2px;
+    height: 40px;
+    background: var(--border);
+    border-radius: 2px;
+    transition: height 0.2s, background 0.2s;
+}
+
+.resize-handle-vertical:hover,
+.resize-handle-vertical.active {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.resize-handle-vertical:hover::after,
+.resize-handle-vertical.active::after {
+    height: 60px;
+    background: var(--accent);
+}
+
+.resize-handle-horizontal {
+    height: 6px;
+    cursor: row-resize;
+    background: transparent;
+    border-radius: 3px;
+    flex-shrink: 0;
+    transition: background 0.2s;
+    position: relative;
+}
+
+.resize-handle-horizontal::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 2px;
+    width: 40px;
+    background: var(--border);
+    border-radius: 2px;
+    transition: width 0.2s, background 0.2s;
+}
+
+.resize-handle-horizontal:hover,
+.resize-handle-horizontal.active {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.resize-handle-horizontal:hover::after,
+.resize-handle-horizontal.active::after {
+    width: 60px;
+    background: var(--accent);
+}
+
+/* Prevent text selection while dragging */
+.resizing {
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    cursor: col-resize !important;
+}
+
+.resizing-h {
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    cursor: row-resize !important;
 }
 
 .output-header {
@@ -428,4 +515,90 @@ ul {
     font-size: 20px;
     font-weight: 600;
     color: var(--accent);
+}
+
+/* ================================
+   AUTOCOMPLETE DROPDOWN
+================================ */
+.autocomplete-dropdown {
+    min-width: 220px;
+    max-width: 300px;
+    max-height: 250px;
+    overflow-y: auto;
+
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    padding: 6px;
+
+    z-index: 9999;
+    animation: fadeIn 0.15s ease;
+}
+
+/* Scrollbar (optional but looks clean) */
+.autocomplete-dropdown::-webkit-scrollbar {
+    width: 6px;
+}
+
+.autocomplete-dropdown::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 10px;
+}
+
+/* ================================
+   DROPDOWN ITEMS
+================================ */
+.ac-item {
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+
+    font-size: 14px;
+    color: var(--text);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    transition: all 0.15s ease;
+}
+
+/* Hover effect */
+.ac-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* ACTIVE ITEM (keyboard navigation) */
+.ac-item.active {
+    background: var(--accent);
+    color: white;
+    transform: scale(1.02);
+}
+
+/* Highlighted match */
+.ac-item b {
+    color: var(--accent);
+}
+
+/* When active, keep contrast */
+.ac-item.active b {
+    color: #fff;
+    text-decoration: underline;
+}
+
+/* ================================
+   ANIMATION
+================================ */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
